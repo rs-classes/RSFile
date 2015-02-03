@@ -9,9 +9,9 @@
 
 class RSFile{
  public:
-  RSFile(const char* fileName, onst char *mode);
+  RSFile(const char* fileName, const char *mode);
   char* ReadLine();
-  char* ReadChar();
+  char ReadChar();
   
   int Write(const char* text);
   int Write(char text);

@@ -1,6 +1,6 @@
-#include "header/RSFile.h"
+#include "include/RSFile.h"
 
-RSFile::RSFile(const char* fileName, const char* mode);
+RSFile::RSFile(const char* fileName, const char* mode)
 {
   m_fileName = fileName;
   m_isOpen = false;
@@ -13,16 +13,29 @@ RSFile::RSFile(const char* fileName, const char* mode);
 }
 char* RSFile::ReadLine()
 {
+  char c;
+  char out[102];
+  out[101] = '\0';
+
+  for (int i = 0; i<100; i++)
+   {
+     c = ReadChar();
+     if( c == EOF  )
+	break ;
+     if(c == '\n')
+       break;
+     //}
+     printf("%c",c);
+     //out[i] = c;
+     //out[i+1] = '\n';
+     //out[i+2] = '\0';
+   }
+   return out;
 }
-char* RSFile::ReadChar()
+char RSFile::ReadChar()
 {
-  //FILE *fp;
-  // int c;
-  
-  //fp = fopen("file.txt","r");
-  //while(1)
-  //{
-  // c = fgetc(fp);
+
+  char c =  fgetc(mp_fp);
   //if( feof(fp) )
   //{ 
   //   break ;
@@ -31,15 +44,19 @@ char* RSFile::ReadChar()
   //}
 }
 
-int RSFile::Write(const char* text);
+int RSFile::Write(const char* text)
 {
-  int chars = fprintf(mp_fp, "%s",text);
-  if(chars > 0)
+  int count = fprintf(mp_fp, "%s",text);
+  if(count > 0)
     return 0;
   return RSFILE_ERROR_WRITE;
 }
 int RSFile::Write(char text)
 {
+  int count = fprintf(mp_fp, "%c",text);
+  if(count > 0)
+    return 0;
+  return RSFILE_ERROR_WRITE;
 }
 
 RSFile::~RSFile()
