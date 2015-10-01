@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string>
 
 #define RSFILE_ERROR_START 1000
 #define RSFILE_ERROR_WRITE (RSFILE_ERROR_START+1)
@@ -10,7 +11,7 @@
 class RSFile{
  public:
   RSFile(const char* fileName, const char *mode);
-  char* ReadLine();
+  std::string ReadLine();
   char ReadChar();
   
   int Write(const char* text);

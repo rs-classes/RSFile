@@ -11,21 +11,22 @@ RSFile::RSFile(const char* fileName, const char* mode)
   if (mp_fp != NULL)
     m_isOpen = true;
 }
-char* RSFile::ReadLine()
+std::string RSFile::ReadLine()
 {
-  char c;
-  char out[102];
-  out[101] = '\0';
+  char c = ' ';
+  std::string out = "";
 
-  for (int i = 0; i<100; i++)
+  while (true)
    {
      c = ReadChar();
+     out += c;
      if( c == EOF  )
 	break ;
      if(c == '\n')
        break;
-     //}
-     printf("%c",c);
+     
+       //}
+     //printf("%c",c);
      //out[i] = c;
      //out[i+1] = '\n';
      //out[i+2] = '\0';
